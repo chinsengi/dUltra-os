@@ -1,5 +1,13 @@
 # dUltra: Ultra-Fast Diffusion Large Language Models via Reinforcement Learning
 
+<p align="center">
+<a href="https://arxiv.org/abs/2512.21446"><img src="https://img.shields.io/badge/arXiv-2505.10446-b31b1b.svg" alt="ArXiv"></a>
+<a href="https://huggingface.co/sengi/dUltra-math"><img src="https://img.shields.io/badge/Huggingface-dUltra math-yellow" alt="Checkpoint"></a>
+<a href="https://huggingface.co/sengi/dUltra-coding"><img src="https://img.shields.io/badge/Huggingface-dUltra coding-yellow" alt="Checkpoint"></a>
+<a href="https://huggingface.co/sengi/dUltra-math-b128"><img src="https://img.shields.io/badge/Huggingface-dUltra math b128-yellow" alt="Checkpoint"></a>
+<a href="https://huggingface.co/sengi/dUltra-coding-b128"><img src="https://img.shields.io/badge/Huggingface-dUltra coding b128-yellow" alt="Checkpoint"></a>
+</p>
+
 ## Table of Contents
 
 - [dUltra: Ultra-Fast Diffusion Large Language Models via Reinforcement Learning](#dultra-ultra-fast-diffusion-large-language-models-via-reinforcement-learning)
@@ -17,7 +25,7 @@
     - [Math Evaluation](#math-evaluation)
     - [Coding Evaluation](#coding-evaluation)
   - [Troubleshooting](#troubleshooting)
-    - [Dataset Version Conflicts](#dataset-version-conflicts)
+    - [Unable to download APPS dataset](#unable-to-download-apps-dataset)
   - [Citation](#citation)
   - [Acknowledgments](#acknowledgments)
 
@@ -120,7 +128,7 @@ Instead of `lm_eval`, We use more robust mathematical expression evaluator [math
 
 ```bash
 cd eval_math
-bash run_eval.sh
+sh run_eval.sh
 ```
 
 After running `run_eval.sh`, we need to parse the results:
@@ -140,7 +148,7 @@ bash eval_coding.sh
 
 ## Troubleshooting
 
-### Dataset Version Conflicts
+### Unable to download APPS dataset
 **Issue**: Error when loading APPS dataset
 **Solution**: Downgrade to `datasets==3.6.0`:
 ```bash
@@ -169,4 +177,4 @@ This project builds upon and acknowledges the following excellent works:
 
 - **Math Evaluation Code**: The evaluation pipeline is adapted from [d1](https://github.com/dllm-reasoning/d1/)
 - **Coding Evaluation Code**: The HumanEval and MBPP evaluation code is adapted from [Dream](https://github.com/DreamLM/Dream/tree/main/eval_instruct)
-- **Model Architecture**: The model architecture is based on [LLaDOU](https://github.com/maple-research-lab/LLaDOU)
+- **Model Architecture**: The model architecture code is based on [LLaDOU](https://github.com/maple-research-lab/LLaDOU)
