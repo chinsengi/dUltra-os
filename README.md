@@ -37,7 +37,7 @@ This repository implements **dUltra**, a learned path planning framework for mas
 
 ![Performance Comparison](media/overview.png)
 
-**Figure**: dUltra achieves state-of-the-art accuracy-efficiency trade-offs on mathematical reasoning (GSM8K, MATH500) and code generation (HumanEval, MBPP) tasks. Left panels show accuracy vs. number of function evaluations (NFE) for different block sizes. Right panel illustrates the architecture with the unmasking planner head.
+**Figure**: dUltra achieves state-of-the-art accuracy-efficiency trade-offs on mathematical reasoning (GSM8K, MATH500) and code generation (HumanEval, MBPP) tasks. Left panels show accuracy vs. number of function evaluations (NFE) for different block sizes. Right panel illustrates the architecture with the unmasking planner head. Here we use a block size of 128 and a generation length of 256
 
 ## Environment Setup
 
