@@ -75,7 +75,7 @@ for DATASET in "${DATASETS[@]}"; do
 
     base_model_name=$(basename "$model_path")
     suffix="block${block_length}_${MODE}_mode_${base_model_name}"
-    output_dir="eval_results/${OUTPUT_PREFIX}_${suffix}"
+    output_dir="eval_results/${suffix}"
 
     echo "Running eval.py on model=${base_model_name}, dataset=${DATASET}, block_length=${block_length}, batch_size=${batch_size}"
 

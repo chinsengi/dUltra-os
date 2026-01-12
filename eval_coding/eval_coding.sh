@@ -79,27 +79,27 @@ for task in "${tasks[@]}"; do
       ${limit_arg}
 
     # dparallel baseline
-    # HF_ALLOW_CODE_EVAL=1 accelerate launch --num_processes=1 -m lm_eval \
-    #   --tasks ${task} \
-    #   --num_fewshot 3 \
-    #   --confirm_run_unsafe_code \
-    #   --model fast_dllm \
-    #   --device cuda \
-    #   --batch_size 1 \
-    #   --model_args model_path="Zigeng/dParallel-LLaDA-8B-instruct",gen_length=${length},steps=${steps},block_length=${block_length},factor=${factor},show_speed=True,save_dir=${dparallel_save_dir} \
-    #   --output_path "${dparallel_output}" \
-    #   ${limit_arg}
+    HF_ALLOW_CODE_EVAL=1 accelerate launch --num_processes=1 -m lm_eval \
+      --tasks ${task} \
+      --num_fewshot 3 \
+      --confirm_run_unsafe_code \
+      --model fast_dllm \
+      --device cuda \
+      --batch_size 1 \
+      --model_args model_path="Zigeng/dParallel-LLaDA-8B-instruct",gen_length=${length},steps=${steps},block_length=${block_length},factor=${factor},show_speed=True,save_dir=${dparallel_save_dir} \
+      --output_path "${dparallel_output}" \
+      ${limit_arg}
 
     # d3llm baseline
-    # HF_ALLOW_CODE_EVAL=1 accelerate launch --num_processes=1 -m lm_eval \
-    #   --tasks ${task} \
-    #   --num_fewshot 3 \
-    #   --confirm_run_unsafe_code \
-    #   --model fast_dllm \
-    #   --device cuda \
-    #   --batch_size 1 \
-    #   --model_args model_path="d3LLM/d3LLM_LLaDA",gen_length=${length},steps=${steps},block_length=${block_length},factor=${factor},show_speed=True,save_dir=${d3llm_save_dir} \
-    #   --output_path "${d3llm_output}" \
-    #   ${limit_arg}
+    HF_ALLOW_CODE_EVAL=1 accelerate launch --num_processes=1 -m lm_eval \
+      --tasks ${task} \
+      --num_fewshot 3 \
+      --confirm_run_unsafe_code \
+      --model fast_dllm \
+      --device cuda \
+      --batch_size 1 \
+      --model_args model_path="d3LLM/d3LLM_LLaDA",gen_length=${length},steps=${steps},block_length=${block_length},factor=${factor},show_speed=True,save_dir=${d3llm_save_dir} \
+      --output_path "${d3llm_output}" \
+      ${limit_arg}
   done
 done

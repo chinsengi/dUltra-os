@@ -25,6 +25,7 @@
     - [Math Evaluation](#math-evaluation)
     - [Coding Evaluation](#coding-evaluation)
   - [Troubleshooting](#troubleshooting)
+    - [flash-attn build failures](#flash-attn-build-failures)
     - [Unable to download APPS dataset](#unable-to-download-apps-dataset)
   - [Citation](#citation)
   - [Acknowledgments](#acknowledgments)
@@ -147,6 +148,22 @@ bash eval_coding.sh
 ```
 
 ## Troubleshooting
+
+### flash-attn build failures
+If `uv sync` fails building `flash-attn` from source, it usually means the build toolchain
+is missing `distutils` or your Torch/CUDA combo has no prebuilt wheel.
+
+Common fixes:
+```bash
+# Prefer setuptools' bundled distutils when the stdlib module is missing.
+SETUPTOOLS_USE_DISTUTILS=local uv sync
+
+# Or install the system distutils package (Debian/Ubuntu example).
+sudo apt-get install -y python3-distutils
+```
+
+If you want to avoid compiling from source, pin Torch to a version that has a
+matching `flash-attn` wheel (e.g., Torch 2.8.x) before re-running `uv sync`.
 
 ### Unable to download APPS dataset
 **Issue**: Error when loading APPS dataset
