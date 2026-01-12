@@ -1,0 +1,85 @@
+#----------------------------------------------------------------------------------------------------
+# ModelConfig
+use_peft: false
+torch_dtype: bfloat16
+load_in_4bit: false
+
+lora_r: 128
+lora_alpha: 64
+lora_dropout: 0.05
+lora_task_type: CAUSAL_LM
+
+# GRPOConfig
+model_path: GSAI-ML/LLaDA-8B-Instruct
+tokenizer_path: GSAI-ML/LLaDA-8B-Instruct
+dataset: gsm8k
+seed: 42
+bf16: true
+use_official_model: False
+sync_ref_model: True
+ref_model_sync_steps: 64
+torch_empty_cache_steps: 10
+
+adam_beta1: 0.9
+adam_beta2: 0.99
+weight_decay: 0.1
+max_grad_norm: 1
+
+use_vllm: false # cannot use for dllm for now
+
+warmup_ratio: 0.001
+learning_rate: 5e-6
+lr_scheduler_type: constant # will override the warmup_ratio
+max_steps: 4800
+
+num_generations: &num_generations 12 # each prompt generates 8 completions
+
+per_device_eval_batch_size: 1
+per_device_train_batch_size: *num_generations
+gradient_accumulation_steps: 1
+
+
+gradient_checkpointing: false
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+
+
+ddp_find_unused_parameters: false
+
+run_name: gsm_grpo_bs12
+output_dir: /checkpoints/gsm_grpo_bs12  # <-- Replace with desired output directory
+
+# Parameters for saving checkpoints
+save_steps: 400
+save_strategy: steps
+save_total_limit: 5
+# resume_from_checkpoint:  # this is the dir to load from, not bool
+
+# Diffusion and GRPO-specific
+max_completion_length: 128
+temperature: .1
+beta: 0.0
+epsilon: 0.2
+epsilon_high: 1
+num_iterations: 1
+advantage_min_clip: -10.0
+
+# Logging
+logging_steps: 1
+report_to: "wandb"
+# report_to: "none"
+log_level: "info"
+
+# reward
+scale_rewards: none
+use_reverse_kl: false
+
+# push to hub
+push_to_hub: false
+hub_model_id: "sengi/LLaDOU-Math-GRPO"
+
+# unmasking schedule
+normalize: true
+scale: 30.0
+use_scheduler: false
+block_length: 32

@@ -1,0 +1,29 @@
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.4.0
+      hooks:
+        # list of supported hooks: https://pre-commit.com/hooks.html
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-yaml
+          # Skip task configs that use a custom !function tag not understood by the stock loader
+          exclude: ^eval_coding/lm_eval/tasks/|^eval_coding/lm_eval/dream_instruct/lm_eval/tasks/
+        - id: detect-private-key
+
+    # python code analysis
+    - repo: https://github.com/astral-sh/ruff-pre-commit
+      rev: v0.9.6
+      hooks:
+        # Run the linter.
+        - id: ruff
+          # Allow hook to succeed after auto-fixing to avoid repeat failures.
+          args: [--fix, --exit-non-zero-on-fix, "--line-length", "88"]
+        # Run the formatter.
+        - id: ruff-format
+
+    # python import sorting
+    - repo: https://github.com/PyCQA/isort
+      rev: 5.12.0
+      hooks:
+        - id: isort
+          args: ["--profile", "black"]

@@ -1,0 +1,75 @@
+# Main configuration for SFT training
+defaults:
+  - _self_
+
+# Model configuration
+model:
+  # name: "GSAI-ML/LLaDA-8B-Instruct"
+  name: "Zigeng/dParallel-LLaDA-8B-instruct"
+  dtype: "bfloat16"
+  torch_compile: True
+  flash_attention: True
+
+# LoRA configuration
+use_peft: false
+lora:
+  r: 128
+  alpha: 256
+  target_modules: ["q_proj", "k_proj", "v_proj"]
+  dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+# Training configuration
+training:
+  batch_size: 16
+  max_length: 512
+  learning_rate: 1e-5
+  grad_accum_steps: 4
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  bf16: true
+  resume_from_checkpoint: true
+  max_steps: 100000
+  lr_scheduler_type: "cosine_warmup_with_min_lr"
+  lr_scheduler_kwargs:
+    min_lr: 1e-7
+
+collator:
+  truncate: false
+
+# Data configuration
+data:
+  # train_dataset: "s1k"
+  train_dataset: "nvidia"
+  train_split: "math, code"
+  eval_split: 0.00005
+  num_proc: 8
+
+# Output configuration
+output:
+  dir: "/gpfs/scrubbed/shirui/planner/${output.job_name}/${now:%Y.%m.%d}/${now:%H.%M.%S}"
+  # dir: "./outputs/sft/llada-planner/2025.10.10/03.56.58"
+  job_name: "llada-planner"
+  hub_model_id: "sengi/dparallel-planner"
+  push_to_hub: true
+
+# Evaluation configuration
+evaluation:
+  strategy: "no"
+  eval_steps: 2000
+  save_steps: 2000
+  save_total_limit: 2
+  per_device_eval_batch_size: 16
+  load_best_model_at_end: false
+
+# Logging configuration
+logging:
+  steps: 10
+  report_to: "wandb"
+
+# Debugging
+debug: false
+
+# Mask token ID for data collator
+mask_token_id: 126336
