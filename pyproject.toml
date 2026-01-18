@@ -7,7 +7,7 @@ requires-python = ">=3.10"
 dependencies = [
     "accelerate>=1.10.0",
     "bitsandbytes>=0.45.3",
-    "datasets==3.6.0", # In order to use APPS dataset on huggingface, downgrade to 3.6.0
+    "datasets==4.0.0", # In order to use APPS dataset on huggingface, downgrade to 3.6.0
     "deepspeed>=0.16.4",
     "dill",
     "evaluate>=0.4.5",
