@@ -5,7 +5,8 @@ defaults:
 # Model configuration
 model:
   # name: "GSAI-ML/LLaDA-8B-Instruct"
-  name: "Zigeng/dParallel-LLaDA-8B-instruct"
+  #name: "Zigeng/dParallel-LLaDA-8B-instruct"
+  name: "../LLaDA-8B-Instruct"
   dtype: "bfloat16"
   torch_compile: True
   flash_attention: True
@@ -48,7 +49,8 @@ data:
 
 # Output configuration
 output:
-  dir: "/gpfs/scrubbed/shirui/planner/${output.job_name}/${now:%Y.%m.%d}/${now:%H.%M.%S}"
+  # dir: "/gpfs/scrubbed/shirui/planner/${output.job_name}/${now:%Y.%m.%d}/${now:%H.%M.%S}"
+  dir: "./${output.job_name}/${now:%Y.%m.%d}/${now:%H.%M.%S}"
   # dir: "./outputs/sft/llada-planner/2025.10.10/03.56.58"
   job_name: "llada-planner"
   hub_model_id: "sengi/dparallel-planner"
